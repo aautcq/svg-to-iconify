@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+import os from 'node:os'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import chalk from 'chalk'
@@ -11,7 +12,7 @@ const { a, p, s, o } = await yargs(hideBin(process.argv))
     describe: 'Icon set author',
     type: 'string',
     demandOption: false,
-    default: 'Me',
+    default: os.userInfo().username,
   })
   .option('p', {
     alias: 'prefix',
@@ -25,14 +26,14 @@ const { a, p, s, o } = await yargs(hideBin(process.argv))
     describe: 'Path to the folder hosting the SVG files',
     type: 'string',
     demandOption: false,
-    default: 'assets/icons/svgs',
+    default: '.',
   })
   .option('o', {
     alias: 'output',
     describe: 'Path to the output folder for the JSON file',
     type: 'string',
     demandOption: false,
-    default: 'assets/icons/json',
+    default: undefined,
   })
   .help(true)
   .argv
@@ -40,7 +41,7 @@ const { a, p, s, o } = await yargs(hideBin(process.argv))
 console.info(chalk.white('Generating icon set...'))
 
 try {
-  await generateIconSet(a, p, s, { outputDir: o })
+  await generateIconSet(a, p, s, { outputDir: o ?? s })
   process.exit(0)
 }
 catch (e) {

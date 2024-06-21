@@ -11,35 +11,23 @@ Converts SVG icons to Iconify JSON data, allowing the use of popular Nuxt module
 Using NPM or whatever your preferred package manager is
 
 ```bash
-npm i @aautcq/svg-to-iconify
+npm i -g @aautcq/svg-to-iconify
 ```
 
 ## Usage
 
-This package comes with a CLI to help build Iconify icon sets from SVG files locally hosted in your project source code. To use it, you can create a new script in your `package.json` file
-
-```json
-{
-  "scripts": {
-    "convert-icons": "svg-to-iconify -s=assets/icons/svgs -o=assets/icons/json"
-  }
-}
+```bash
+svg-to-iconify
 ```
 
 The `svg-to-iconify` command comes with the following options
 
 | Option label | Description | Default value |
 | ------------ | ----------- | ------------- |
-| `-a`, `--author` | Icon set author field | `'Me'` |
+| `-a`, `--author` | Icon set author field | `os.userInfo().username` |
 | `-p`, `--prefix` | Icon set prefix | `'custom'` |
-| `-s`, `--source` | Path to the folder hosting the SVG files | `'assets/icons/svgs'` |
-| `-o`, `--output` | Path to the output folder for the JSON file | `'assets/icons/json'` |
-
-To run the script and convert you SVG icons, run
-
-```bash
-npm run convert-icons
-```
+| `-s`, `--source` | Path to the folder hosting the SVG files | `'.'` (current folder) |
+| `-o`, `--output` | Path to the output folder for the JSON file | Same as source |
 
 A JSON file containing the new icon set will be created in the output directory.
 
